@@ -1,0 +1,1002 @@
+/**
+ * ============================================
+ * Rádio FilispiM - Folla de Estilos
+ * ============================================
+ * 
+ * Este arquivo contén todos os estilos visuais da webapp.
+ * Usa CSS Variables para facilitar a personalización de cores.
+ * 
+ * ESTRUTURA:
+ * 1. Variables CSS (código de cores)
+ * 2. Reset e estilos base
+ * 3. Iconos
+ * 4. Header (cabeceira)
+ * 5. Contido principal
+ * 6. Tarxetas
+ * 7. Reproductor de audio
+ * 8. Programación
+ * 9. Botóns de compartir
+ * 10. Blog
+ * 11. Enlaces rápidos
+ * 12. Footer (pé de páxina)
+ * 13. Elementos auxiliares
+ * 
+ * @author Rádio FilispiM
+ * @version 1.0
+ */
+
+/* ============================================
+   1. VARIABLES CSS
+   ============================================
+   Define todas as cores usadas na webapp.
+   Para cambiar a paleta de cores, modifica estes valores.
+*/
+:root {
+    /* --- Cores principais --- */
+    --color-primary: #dc2626;           /* Vermello principal (marca) */
+    --color-primary-light: #ef4444;     /* Vermello claro (hover) */
+    --color-background: #0a0a0a;        /* Fondo negro */
+    --color-card: #18181b;              /* Fondo das tarxetas */
+    --color-text: #fafafa;              /* Texto principal (branco) */
+    --color-text-muted: #a1a1aa;        /* Texto secundario (gris) */
+    --color-border: #3f3f46;            /* Bordos */
+    --color-secondary: #27272a;         /* Fondo secundario */
+    
+    /* --- Cores de redes sociais --- */
+    --color-whatsapp: #25D366;          /* Verde WhatsApp */
+    --color-facebook: #1877F2;          /* Azul Facebook */
+    --color-telegram: #0088CC;          /* Azul Telegram */
+    --color-twitter: #ffffff;           /* Branco X/Twitter */
+    --color-instagram-1: #f09433;       /* Gradiente Instagram */
+    --color-instagram-2: #dc2743;       /* Gradiente Instagram */
+    --color-instagram-3: #bc1888;       /* Gradiente Instagram */
+    
+    /* --- Cores de tipos de programa --- */
+    --color-directo: #dc2626;           /* Vermello: emisión en directo */
+    --color-repeticion: #3b82f6;        /* Azul: repetición */
+    --color-alheio: #f97316;            /* Laranxa: produción allea */
+    --color-musical: #22c55e;           /* Verde: espazo musical */
+}
+
+/* ============================================
+   2. RESET E ESTILOS BASE
+   ============================================
+   Normaliza os estilos do navegador e define
+   a base para todo o documento.
+*/
+
+/* Reset universal: eliminar marxes e paddings por defecto */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* Estilos base do HTML */
+html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+
+/* Corpo do documento */
+body { 
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+    background-color: var(--color-background); 
+    color: var(--color-text); 
+    line-height: 1.5; 
+    min-height: 100vh; 
+    overflow-x: hidden; 
+}
+
+/* Contedor principal: usa flexbox para manter o footer abaixo */
+.app-container { 
+    min-height: 100vh; 
+    display: flex; 
+    flex-direction: column; 
+    width: 100%; 
+    max-width: 100vw; 
+    overflow-x: hidden; 
+}
+
+/* ============================================
+   3. ICONOS
+   ============================================
+   Tamaños para os iconos SVG usados na interface.
+*/
+
+.icon-logo { width: 20px; height: 20px; color: white; }
+.icon-play { width: 24px; height: 24px; color: white; margin-left: 2px; }
+.icon-small { width: 14px; height: 14px; flex-shrink: 0; }
+.icon-volume { width: 18px; height: 18px; }
+.icon-share { width: 16px; height: 16px; color: var(--color-primary); flex-shrink: 0; }
+.icon-btn { width: 14px; height: 14px; flex-shrink: 0; }
+.icon-link { width: 14px; height: 14px; margin-right: 6px; flex-shrink: 0; }
+.icon-footer { width: 16px; height: 16px; color: white; }
+
+/* ============================================
+   4. HEADER (CABECEIRA)
+   ============================================
+   Contén o logo, nome da radio, reloxo e indicador "NO AR".
+*/
+
+/* Cabeceira con gradiente vermello */
+.header { 
+    background: linear-gradient(to right, var(--color-card), var(--color-card), rgba(220, 38, 38, 0.15)); 
+    border-bottom: 1px solid var(--color-border); 
+    padding: 0.75rem; 
+    width: 100%; 
+}
+
+/* Contedor flexible da cabeceira */
+.header-content { 
+    width: 100%; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    gap: 0.5rem; 
+}
+
+/* Sección esquerda: logo e nome */
+.header-left { 
+    display: flex; 
+    align-items: center; 
+    gap: 0.5rem; 
+    min-width: 0; 
+    flex: 1; 
+}
+
+/* Logo circular vermello con sombra */
+.logo { 
+    width: 36px; 
+    height: 36px; 
+    background: var(--color-primary); 
+    border-radius: 50%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    box-shadow: 0 0 15px rgba(220, 38, 38, 0.5); 
+    flex-shrink: 0; 
+}
+
+/* Contedor de información do header */
+.header-info { min-width: 0; overflow: hidden; }
+
+/* Título da radio */
+.header-title { 
+    font-size: 0.9375rem; 
+    font-weight: 700; 
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+}
+
+/* Slogan baixo o título */
+.header-slogan { 
+    font-size: 0.6875rem; 
+    color: var(--color-text-muted); 
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+}
+
+/* Sección dereita: reloxo e badge */
+.header-right { 
+    display: flex; 
+    align-items: center; 
+    gap: 0.5rem; 
+    flex-shrink: 0; 
+}
+
+/* Reloxo (oculto en móbil, visible en desktop) */
+.current-time { display: none; text-align: right; }
+.current-time .time { font-size: 1.125rem; font-weight: 700; }
+.current-time .date { font-size: 0.6875rem; color: var(--color-text-muted); text-transform: capitalize; }
+
+/* Media query: estilos para pantallas maiores de 640px */
+@media (min-width: 640px) { 
+    .header { padding: 0.875rem 1rem; } 
+    .logo { width: 44px; height: 44px; } 
+    .header-title { font-size: 1.125rem; } 
+    .header-slogan { font-size: 0.75rem; } 
+    .current-time { display: block; } 
+}
+
+/* Badge "NO AR" con punto animado */
+.live-badge { 
+    display: flex; 
+    align-items: center; 
+    gap: 0.375rem; 
+    background: var(--color-primary); 
+    color: white; 
+    padding: 0.25rem 0.625rem; 
+    border-radius: 9999px; 
+    font-size: 0.75rem; 
+    font-weight: 700; 
+    box-shadow: 0 0 15px rgba(220, 38, 38, 0.5); 
+    white-space: nowrap; 
+}
+
+/* Punto animado que parpadea */
+.live-dot { 
+    width: 6px; 
+    height: 6px; 
+    background: white; 
+    border-radius: 50%; 
+    animation: pulse 1.5s ease-in-out infinite; 
+}
+
+/* Animación de pulso */
+@keyframes pulse { 
+    0%, 100% { opacity: 1; } 
+    50% { opacity: 0.5; } 
+}
+
+/* ============================================
+   5. CONTIDO PRINCIPAL
+   ============================================
+   Estructura en grid para desktop, columna para móbil.
+*/
+
+/* Contedor principal centrado */
+.main-content { 
+    flex: 1; 
+    padding: 0.75rem; 
+    width: 100%; 
+    max-width: 1200px; 
+    margin: 0 auto; 
+}
+
+/* Grid: columna en móbil, 2 columnas en desktop */
+.grid-container { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 0.75rem; 
+    width: 100%; 
+}
+
+/* Media query: grid de 2 columnas en desktop */
+@media (min-width: 1024px) { 
+    .main-content { padding: 1rem; } 
+    .grid-container { 
+        display: grid; 
+        grid-template-columns: 2fr 1fr;  /* Columna principal 2/3, sidebar 1/3 */
+        gap: 1.5rem; 
+    } 
+}
+
+/* Columna principal (esquerda) */
+.column-main { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 0.75rem; 
+    width: 100%; 
+}
+
+/* Columna lateral (dereita) */
+.column-sidebar { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 0.75rem; 
+    width: 100%; 
+}
+
+/* ============================================
+   6. TARXETAS (CARDS)
+   ============================================
+   Estilo común para todos os contedores de contido.
+*/
+
+/* Tarxeta base con fondo escuro e bordo */
+.card { 
+    background: var(--color-card); 
+    border: 1px solid var(--color-border); 
+    border-radius: 0.5rem; 
+    overflow: hidden; 
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3); 
+    width: 100%; 
+    max-width: 100%; 
+}
+
+/* Cabeceira das tarxetas */
+.card-header { padding: 0.5rem 0.75rem; }
+
+/* Título das tarxetas */
+.card-title { font-size: 0.8125rem; font-weight: 600; }
+
+/* Media query: tarxetas máis grandes en desktop */
+@media (min-width: 640px) { 
+    .card-header { padding: 0.5rem 1rem; } 
+    .card-title { font-size: 0.875rem; } 
+}
+
+/* ============================================
+   7. REPRODUTOR DE AUDIO
+   ============================================
+   Player principal con botón de play, info do programa
+   e control de volume.
+*/
+
+/* Tarxeta do reproductor con gradiente vermello */
+.player-card { 
+    background: linear-gradient(135deg, rgba(220, 38, 38, 0.25), rgba(220, 38, 38, 0.08), var(--color-background)); 
+}
+
+/* Animación de brillo cando está reproducindo */
+.player-card.playing { animation: glow 2s ease-in-out infinite; }
+
+/* Animación de resplandor */
+@keyframes glow { 
+    0%, 100% { box-shadow: 0 0 20px rgba(220, 38, 38, 0.5); } 
+    50% { box-shadow: 0 0 35px rgba(220, 38, 38, 0.8); } 
+}
+
+/* Contido do reproductor: botón, info, volume */
+.player-content { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    gap: 0.75rem; 
+    padding: 0.75rem; 
+}
+
+/* Media query: disposición horizontal en desktop */
+@media (min-width: 640px) { 
+    .player-content { 
+        flex-direction: row; 
+        gap: 1rem; 
+        padding: 1rem 1.25rem; 
+    } 
+}
+
+/* Botón de play/pause circular vermello */
+.play-button { 
+    width: 52px; 
+    height: 52px; 
+    border-radius: 50%; 
+    background: var(--color-primary); 
+    border: none; 
+    cursor: pointer; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    box-shadow: 0 0 25px rgba(220, 38, 38, 0.6); 
+    transition: background 0.2s, transform 0.1s; 
+    flex-shrink: 0; 
+}
+
+/* Media query: botón máis grande en desktop */
+@media (min-width: 640px) { 
+    .play-button { width: 60px; height: 60px; } 
+}
+
+/* Efectos hover e active do botón de play */
+.play-button:hover { background: var(--color-primary-light); box-shadow: 0 0 35px rgba(220, 38, 38, 0.8); }
+.play-button:active { transform: scale(0.95); }
+
+/* Información do programa actual */
+.player-info { 
+    flex: 1; 
+    text-align: center; 
+    min-width: 0; 
+    width: 100%; 
+}
+
+/* Media query: aliñar á esquerda en desktop */
+@media (min-width: 640px) { 
+    .player-info { text-align: left; width: auto; } 
+}
+
+/* Título do programa e tipo */
+.program-title { 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    gap: 0.375rem; 
+    flex-wrap: wrap; 
+    margin-bottom: 0.25rem; 
+}
+
+/* Media query: aliñar á esquerda en desktop */
+@media (min-width: 640px) { 
+    .program-title { justify-content: flex-start; gap: 0.5rem; } 
+}
+
+/* Nome do programa */
+.program-name { 
+    font-size: 1rem; 
+    font-weight: 700; 
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    max-width: 100%; 
+}
+
+/* Media query: nome máis grande en desktop */
+@media (min-width: 640px) { 
+    .program-name { font-size: 1.25rem; } 
+}
+
+/* Etiqueta de tipo de programa (AO VIVO, REPET., etc.) */
+.program-type { 
+    font-size: 0.5625rem; 
+    padding: 0.125rem 0.375rem; 
+    border-radius: 0.25rem; 
+    color: white; 
+    font-weight: 600; 
+    flex-shrink: 0; 
+}
+
+/* Media query: etiqueta máis grande en desktop */
+@media (min-width: 640px) { 
+    .program-type { font-size: 0.625rem; } 
+}
+
+/* Cores por tipo de programa */
+.program-type.directo { background: var(--color-directo); }      /* Vermello */
+.program-type.repeticion { background: var(--color-repeticion); } /* Azul */
+.program-type.alheio { background: var(--color-alheio); }        /* Laranxa */
+.program-type.musical { background: var(--color-musical); }      /* Verde */
+
+/* Info do presentador e calendario */
+.program-host { 
+    font-size: 0.75rem; 
+    color: var(--color-text-muted); 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    gap: 0.25rem; 
+    flex-wrap: wrap; 
+}
+
+/* Media query: aliñar á esquerda en desktop */
+@media (min-width: 640px) { 
+    .program-host { justify-content: flex-start; gap: 0.375rem; font-size: 0.875rem; } 
+}
+
+/* Control de volume */
+.volume-control { 
+    display: flex; 
+    align-items: center; 
+    gap: 0.375rem; 
+    width: 100%; 
+    justify-content: center; 
+}
+
+/* Media query: control de volume posicionado á dereita */
+@media (min-width: 640px) { 
+    .volume-control { width: auto; gap: 0.5rem; } 
+}
+
+/* Botón de mute/unmute */
+.volume-button { 
+    background: none; 
+    border: none; 
+    color: var(--color-text-muted); 
+    cursor: pointer; 
+    padding: 0.125rem; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    transition: color 0.2s; 
+    flex-shrink: 0; 
+}
+
+/* Hover do botón de volume */
+.volume-button:hover { color: var(--color-primary); }
+
+/* Slider de volume */
+.volume-slider { 
+    width: 80px; 
+    height: 5px; 
+    border-radius: 3px; 
+    background: var(--color-secondary); 
+    appearance: none; 
+    cursor: pointer; 
+}
+
+/* Media query: slider máis grande en desktop */
+@media (min-width: 640px) { 
+    .volume-slider { width: 100px; height: 6px; } 
+}
+
+/* Indicador do slider (bóla vermella) */
+.volume-slider::-webkit-slider-thumb { 
+    appearance: none; 
+    width: 14px; 
+    height: 14px; 
+    border-radius: 50%; 
+    background: var(--color-primary); 
+    cursor: pointer; 
+    box-shadow: 0 0 8px rgba(220, 38, 38, 0.5); 
+}
+
+/* Info da frecuencia FM */
+.fm-info { 
+    font-size: 0.75rem; 
+    color: var(--color-text-muted); 
+    text-align: center; 
+    padding: 0.5rem 0.75rem; 
+    border-top: 1px solid var(--color-border); 
+}
+
+/* Número de frecuencia resaltado */
+.fm-info strong { color: var(--color-primary); }
+
+/* ============================================
+   8. PROGRAMACIÓN (CALENDARIO)
+   ============================================
+   Lista de eventos do día con scroll.
+*/
+
+/* Lista con altura máxima e scroll */
+.schedule-list { 
+    max-height: 280px; 
+    overflow-y: auto; 
+    overflow-x: hidden; 
+}
+
+/* Media query: altura maior en desktop */
+@media (min-width: 640px) { 
+    .schedule-list { max-height: 320px; } 
+}
+
+/* Cada elemento da programación */
+.schedule-item { 
+    padding: 0.625rem 0.75rem; 
+    border-bottom: 1px solid var(--color-border); 
+    transition: background 0.2s; 
+    width: 100%; 
+}
+
+/* Eliminar bordo do último elemento */
+.schedule-item:last-child { border-bottom: none; }
+
+/* Hover: fondo vermello suave */
+.schedule-item:hover { background: rgba(220, 38, 38, 0.08); }
+
+/* Evento actual: fondo vermello máis intenso */
+.schedule-item.current { background: rgba(220, 38, 38, 0.15); }
+
+/* Fila do evento: info á esquerda, hora á dereita */
+.schedule-item-row { 
+    display: flex; 
+    justify-content: space-between; 
+    gap: 0.375rem; 
+    width: 100%; 
+}
+
+/* Información do evento */
+.schedule-item-info { 
+    flex: 1; 
+    min-width: 0; 
+    overflow: hidden; 
+}
+
+/* Título do evento */
+.schedule-item-title { 
+    display: flex; 
+    align-items: center; 
+    gap: 0.375rem; 
+    margin-bottom: 0.125rem; 
+    flex-wrap: nowrap; 
+}
+
+/* Nome do programa/evento */
+.schedule-item-name { 
+    font-size: 0.8125rem; 
+    font-weight: 500; 
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    flex: 1; 
+    min-width: 0; 
+}
+
+/* Media query: nome máis grande en desktop */
+@media (min-width: 640px) { 
+    .schedule-item-name { font-size: 0.9375rem; } 
+}
+
+/* Nome do evento actual resaltado */
+.schedule-item.current .schedule-item-name { color: var(--color-primary); }
+
+/* Punto vermello animado para o evento actual */
+.current-dot { 
+    width: 6px; 
+    height: 6px; 
+    background: var(--color-primary); 
+    border-radius: 50%; 
+    animation: pulse 1.5s ease-in-out infinite; 
+    flex-shrink: 0; 
+}
+
+/* Tipo de programa na lista */
+.schedule-item-type { 
+    font-size: 0.5625rem; 
+    padding: 0.0625rem 0.25rem; 
+    border-radius: 0.125rem; 
+    color: white; 
+    font-weight: 600; 
+    flex-shrink: 0; 
+    white-space: nowrap; 
+}
+
+/* Media query: tipo máis grande en desktop */
+@media (min-width: 640px) { 
+    .schedule-item-type { font-size: 0.625rem; padding: 0.125rem 0.375rem; } 
+}
+
+/* Info do presentador na lista */
+.schedule-item-host { 
+    font-size: 0.6875rem; 
+    color: var(--color-text-muted); 
+    display: flex; 
+    align-items: center; 
+    gap: 0.25rem; 
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+}
+
+/* Media query: info máis grande en desktop */
+@media (min-width: 640px) { 
+    .schedule-item-host { font-size: 0.8125rem; gap: 0.375rem; } 
+}
+
+/* Hora do evento */
+.schedule-item-time { 
+    font-size: 0.75rem; 
+    font-weight: 600; 
+    flex-shrink: 0; 
+    white-space: nowrap; 
+}
+
+/* ============================================
+   9. BOTÓNS DE COMPARTIR
+   ============================================
+   Botóns para compartir en redes sociais.
+*/
+
+/* Tarxeta de compartir */
+.share-card { background: var(--color-card); }
+
+/* Contedor dos botóns de compartir */
+.share-content { 
+    display: flex; 
+    flex-wrap: wrap; 
+    align-items: center; 
+    gap: 0.5rem; 
+    padding: 0.625rem 0.75rem; 
+}
+
+/* Media query: máis espazo en desktop */
+@media (min-width: 640px) { 
+    .share-content { gap: 0.625rem; padding: 0.75rem 1rem; } 
+}
+
+/* Estilo base dos botóns de compartir */
+.share-btn { 
+    background: var(--color-secondary); 
+    border: 1px solid var(--color-border); 
+    color: var(--color-text); 
+    padding: 0.375rem; 
+    border-radius: 0.375rem; 
+    font-size: 0.75rem; 
+    cursor: pointer; 
+    transition: all 0.2s; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    gap: 0.25rem; 
+    min-width: 32px; 
+    height: 32px; 
+    flex-shrink: 0; 
+}
+
+/* Media query: botóns máis grandes en desktop */
+@media (min-width: 640px) { 
+    .share-btn { padding: 0.5rem; min-width: 36px; height: 36px; border-radius: 0.5rem; font-size: 0.875rem; } 
+}
+
+/* Hover xenérico: bordo vermello */
+.share-btn:hover { border-color: var(--color-primary); color: var(--color-primary); transform: translateY(-1px); }
+
+/* Cores específicas por rede social */
+.share-btn.whatsapp { background: var(--color-whatsapp); border-color: var(--color-whatsapp); color: white; }
+.share-btn.whatsapp:hover { background: #1da851; border-color: #1da851; }
+
+.share-btn.facebook { background: var(--color-facebook); border-color: var(--color-facebook); color: white; }
+.share-btn.facebook:hover { background: #0d65d9; border-color: #0d65d9; }
+
+.share-btn.telegram { background: var(--color-telegram); border-color: var(--color-telegram); color: white; }
+.share-btn.telegram:hover { background: #006db3; border-color: #006db3; }
+
+.share-btn.twitter { background: var(--color-twitter); border-color: var(--color-twitter); color: black; }
+.share-btn.twitter:hover { background: #e5e5e5; border-color: #e5e5e5; }
+
+.share-btn.instagram { background: linear-gradient(45deg, var(--color-instagram-1), var(--color-instagram-2), var(--color-instagram-3)); border-color: transparent; color: white; }
+.share-btn.instagram:hover { opacity: 0.9; }
+
+/* Botón de copiar URL (estilo diferente, sen fondo) */
+.share-btn.copy { 
+    background: transparent; 
+    border: 1px solid var(--color-border); 
+    color: var(--color-text-muted); 
+    padding: 0.375rem 0.5rem; 
+}
+
+/* Media query: botón copiar máis grande en desktop */
+@media (min-width: 640px) { 
+    .share-btn.copy { padding: 0.5rem 0.875rem; } 
+}
+
+/* ============================================
+   10. BLOG
+   ============================================
+   Lista das últimas entradas do blog.
+*/
+
+/* Lista de entradas do blog */
+.blog-list { padding: 0 0.75rem 0.5rem; }
+
+/* Media query: máis espazo en desktop */
+@media (min-width: 640px) { 
+    .blog-list { padding: 0 1rem 0.75rem; } 
+}
+
+/* Cada entrada do blog */
+.blog-item { 
+    padding: 0.5rem; 
+    background: rgba(255, 255, 255, 0.03); 
+    border-radius: 0.375rem; 
+    margin-bottom: 0.5rem; 
+    cursor: pointer; 
+    transition: all 0.2s; 
+    border: 1px solid transparent; 
+    width: 100%; 
+    overflow: hidden; 
+}
+
+/* Media query: entradas máis grandes en desktop */
+@media (min-width: 640px) { 
+    .blog-item { padding: 0.625rem; border-radius: 0.5rem; margin-bottom: 0.625rem; } 
+}
+
+/* Hover: fondo e bordo vermello */
+.blog-item:hover { background: rgba(220, 38, 38, 0.08); border-color: rgba(220, 38, 38, 0.3); }
+
+/* Título da entrada */
+.blog-item-title { 
+    font-size: 0.8125rem; 
+    font-weight: 500; 
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    width: 100%; 
+}
+
+/* Media query: título máis grande en desktop */
+@media (min-width: 640px) { 
+    .blog-item-title { font-size: 0.9375rem; } 
+}
+
+/* Data da entrada */
+.blog-item-date { 
+    font-size: 0.6875rem; 
+    color: var(--color-primary); 
+    margin-top: 0.125rem; 
+}
+
+/* Media query: data máis grande en desktop */
+@media (min-width: 640px) { 
+    .blog-item-date { font-size: 0.8125rem; margin-top: 0.25rem; } 
+}
+
+/* Enlace ao blog completo */
+.blog-link { 
+    display: block; 
+    text-align: center; 
+    color: var(--color-primary); 
+    text-decoration: none; 
+    font-size: 0.75rem; 
+    padding: 0.5rem; 
+    border-top: 1px solid var(--color-border); 
+}
+
+/* Media query: enlace máis grande en desktop */
+@media (min-width: 640px) { 
+    .blog-link { font-size: 0.875rem; padding: 0.625rem; } 
+}
+
+/* Hover: subliñado */
+.blog-link:hover { text-decoration: underline; }
+
+/* ============================================
+   11. ENLACES RÁPIDOS
+   ============================================
+   Enlaces a redes sociais e blog.
+*/
+
+/* Contedor de enlaces rápidos */
+.links-card { padding: 0.5rem 0.75rem; }
+
+/* Media query: máis espazo en desktop */
+@media (min-width: 640px) { 
+    .links-card { padding: 0.625rem 1rem; } 
+}
+
+/* Cada enlace rápido */
+.quick-link { 
+    display: flex; 
+    align-items: center; 
+    padding: 0.375rem 0; 
+    color: var(--color-text-muted); 
+    text-decoration: none; 
+    font-size: 0.8125rem; 
+    transition: color 0.2s; 
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+}
+
+/* Media query: enlace máis grande en desktop */
+@media (min-width: 640px) { 
+    .quick-link { padding: 0.5rem 0; font-size: 0.875rem; } 
+}
+
+/* Hover: cor vermella */
+.quick-link:hover { color: var(--color-primary); }
+
+/* ============================================
+   12. FOOTER (PÉ DE PÁXINA)
+   ============================================
+   Información de contacto e redes sociais.
+*/
+
+/* Footer con gradiente vermello */
+.footer { 
+    background: linear-gradient(to right, var(--color-card), var(--color-card), rgba(220, 38, 38, 0.15)); 
+    border-top: 1px solid var(--color-border); 
+    padding: 0.625rem 0.75rem; 
+    margin-top: auto;  /* Empurra o footer ao final */
+    width: 100%; 
+}
+
+/* Media query: máis padding en desktop */
+@media (min-width: 640px) { 
+    .footer { padding: 0.875rem 1rem; } 
+}
+
+/* Contedor do footer */
+.footer-content { 
+    width: 100%; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    gap: 0.5rem; 
+}
+
+/* Media query: disposición horizontal en desktop */
+@media (min-width: 640px) { 
+    .footer-content { flex-direction: row; justify-content: space-between; gap: 0.625rem; } 
+}
+
+/* Sección esquerda: logo e info */
+.footer-left { 
+    display: flex; 
+    align-items: center; 
+    gap: 0.5rem; 
+}
+
+/* Logo no footer */
+.footer-logo { 
+    width: 32px; 
+    height: 32px; 
+    background: var(--color-primary); 
+    border-radius: 50%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    box-shadow: 0 0 12px rgba(220, 38, 38, 0.4); 
+    flex-shrink: 0; 
+}
+
+/* Información da radio */
+.footer-info { 
+    display: flex; 
+    flex-direction: column; 
+    min-width: 0; 
+}
+
+/* Nome da radio */
+.footer-name { font-size: 0.75rem; font-weight: 700; }
+
+/* Frequencia FM */
+.footer-fm { font-size: 0.625rem; color: var(--color-primary); }
+
+/* Iconos de redes sociais */
+.footer-social { 
+    display: flex; 
+    gap: 0.75rem; 
+    flex-shrink: 0; 
+}
+
+/* Enlaces de redes sociais */
+.footer-social a { 
+    color: var(--color-text-muted); 
+    text-decoration: none; 
+    transition: color 0.2s; 
+    display: flex; 
+    align-items: center; 
+}
+
+/* Hover: cor vermella */
+.footer-social a:hover { color: var(--color-primary); }
+
+/* Copyright */
+.footer-copy { font-size: 0.625rem; color: var(--color-text-muted); }
+
+/* ============================================
+   13. ELEMENTOS AUXILIARES
+   ============================================
+   Mensaxes de carga, toasts e scrollbars.
+*/
+
+/* Mensaxe de carga */
+.loading { 
+    padding: 1rem; 
+    text-align: center; 
+    color: var(--color-text-muted); 
+    font-size: 0.8125rem; 
+}
+
+/* Media query: texto máis grande en desktop */
+@media (min-width: 640px) { 
+    .loading { padding: 1.25rem; font-size: 0.875rem; } 
+}
+
+/* Toast: mensaxe emerxente */
+.toast { 
+    position: fixed; 
+    bottom: 0.75rem; 
+    left: 50%; 
+    transform: translateX(-50%) translateY(100px);  /* Oculto abaixo */
+    background: var(--color-card); 
+    border: 1px solid var(--color-border); 
+    padding: 0.625rem 0.875rem; 
+    border-radius: 0.5rem; 
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5); 
+    z-index: 1000; 
+    opacity: 0; 
+    transition: all 0.3s; 
+    max-width: calc(100vw - 1.5rem); 
+    font-size: 0.8125rem; 
+}
+
+/* Media query: toast máis grande en desktop */
+@media (min-width: 640px) { 
+    .toast { bottom: 1.25rem; padding: 0.875rem 1.25rem; border-radius: 0.625rem; max-width: none; font-size: 0.875rem; } 
+}
+
+/* Toast visible: animación de entrada */
+.toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+/* Scrollbar personalizada para a lista de programación */
+.schedule-list::-webkit-scrollbar { width: 5px; }
+.schedule-list::-webkit-scrollbar-track { background: transparent; }
+.schedule-list::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 3px; }
+.schedule-list::-webkit-scrollbar-thumb:hover { background: var(--color-primary); }
+
+/* Nome do presentador */
+.host-name { color: var(--color-text); font-weight: 500; }
+
+/* Nome do calendario */
+.calendar-name { 
+    color: var(--color-primary); 
+    opacity: 0.8; 
+    font-size: 0.625rem; 
+}
+
+/* Separador antes do nome do calendario */
+.calendar-name::before { content: "•"; margin-right: 0.25rem; opacity: 0.5; }
+
+/* Media query: nome do calendario máis grande en desktop */
+@media (min-width: 640px) { 
+    .calendar-name { font-size: 0.6875rem; } 
+}
+
+/* Hora de inicio e fin do programa */
+.program-time { font-size: 0.75rem; color: var(--color-text-muted); margin-top: 0.25rem; }
