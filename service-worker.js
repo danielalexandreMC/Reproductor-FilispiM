@@ -6,7 +6,8 @@
  */
 
 // Nome da caché
-const CACHE_NAME = 'radio-filispim-v1';
+// IMPORTANTE: Cambiar o número de versión cando se actualice o SW para forzar a actualización
+const CACHE_NAME = 'radio-filispim-v2';
 
 // Arquivos a cachear (só os esenciais)
 const FILES_TO_CACHE = [
@@ -46,10 +47,19 @@ self.addEventListener('activate', (event) => {
 
 /**
  * Evento fetch: serve desde caché se existe, se non, fetch da rede
+ * EXCEPCIÓN: As peticións a api.php sempre van á rede (non se cachean)
+ * para garantir que os datos de programación estean sempre actualizados.
  */
 self.addEventListener('fetch', (event) => {
     // Ignorar peticións a APIs externas (Google Calendar, RSS, streaming)
     if (!event.request.url.startsWith(self.location.origin)) {
+        return;
+    }
+    
+    // IGNORAR peticións á API local: sempre ir á rede
+    // Isto garante que a programación e o "now playing" estean sempre actualizados
+    if (event.request.url.includes('api.php')) {
+        event.respondWith(fetch(event.request));
         return;
     }
     
