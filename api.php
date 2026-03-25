@@ -27,6 +27,12 @@ header('Content-Type: application/json; charset=utf-8');
 // IMPORTANTE: En produción, considera restrinxir isto ao teu dominio
 header('Access-Control-Allow-Origin: *');
 
+// Headers anti-caché: garante que os datos sempre sexan frescos
+// Isto evita que o navegador, proxys ou o Service Worker cacheen as respostas
+header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+header('Pragma: no-cache');
+header('Expires: 0');
+
 // Cargar configuración (API Key, calendarios, etc.)
 require_once 'config.php';
 
